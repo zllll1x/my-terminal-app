@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sci-Fi Блокнот</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+    <div class="app-slider" id="appSlider">
+
+        <!-- ЭКРАН 1: ПАПКИ -->
+        <section class="app-page" id="foldersPage">
+            <header class="page-header">
+                <h1>ПАПКИ</h1>
+                <button class="nav-btn to-notes" onclick="goToNotes()">✕</button>
+            </header>
+            <div class="scifi-btn-wrapper">
+    <svg class="scifi-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <polygon points="1,1 92,1 99,15 99,99 8,99 1,85" fill="none" stroke="#ff007f" stroke-width="0.8" />
+    </svg>
+    <button class="create-folder-btn" onclick="openFolderModal()">+ СОЗДАТЬ ПАПКУ</button>
+</div>
+
+            <div class="sidebar-folders" id="foldersList"></div>
+        </section>
+
+        <!-- ЭКРАН 2: ЗАМЕТКИ -->
+        <section class="app-page" id="notesPage">
+            <header class="page-header">
+                <button class="nav-btn to-folders" onclick="goToFolders()">
+                    <span class="custom-folder-icon"></span>
+                </button>
+                <h1>ЗАМЕТКИ</h1>
+            </header>
+            <main>
+                <!-- Поле поиска со встроенной лазерной рамкой без обрывов -->
+                <div class="scifi-input-wrapper">
+                    <svg class="scifi-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <polygon points="1,1 93,1 99,30 99,99 7,99 1,70" fill="none" stroke="#ff003c" stroke-width="0.8" />
+                    </svg>
+                    <input type="text" id="searchFields" placeholder="ПОИСК ЗАМЕТОК..." oninput="filterNotes()">
+                </div>
+                
+                <div class="notes-list" id="notesList"></div>
+            </main>
+        </section>
+
+    </div>
+
+    <!-- ОКНА МОДАЛОК -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="scifi-modal">
+            <h3>НОВАЯ СЕССИЯ ЗАПИСИ</h3>
+            <textarea id="noteText" placeholder="Введите текст заметки здесь..."></textarea>
+            <div class="modal-buttons">
+                <button class="modal-btn save" onclick="saveNewNote()">СОХРАНИТЬ</button>
+                <button class="modal-btn cancel" onclick="closeModal()">ОТМЕНА</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="folderModalOverlay">
+        <div class="scifi-modal">
+            <h3>ИНИЦИАЛИЗАЦИЯ ПАПКИ</h3>
+            <input type="text" id="folderNameInput" placeholder="Введите название папки...">
+            <div class="modal-buttons">
+                <button class="modal-btn save" onclick="saveNewFolder()">СОЗДАТЬ</button>
+                <button class="modal-btn cancel" onclick="closeFolderModal()">ОТМЕНА</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="moveModalOverlay">
+        <div class="scifi-modal">
+            <h3>ПЕРЕМЕСТИТЬ В ДИРЕКТОРИЮ</h3>
+            <div id="moveFolderOptions" class="move-options-container"></div>
+            <div class="modal-buttons">
+                <button class="modal-btn cancel" onclick="closeMoveModal()">ОТМЕНА</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="scifi-add-btn" onclick="openModal()">
+        <span class="plus-icon">+</span>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
