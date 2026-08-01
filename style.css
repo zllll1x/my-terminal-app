@@ -1,0 +1,357 @@
+body {
+    background-color: #05070a; 
+    color: #e2e8f0;            
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden; 
+}
+
+.app-slider {
+    display: flex;
+    width: 200vw;
+    height: 100vh;
+    transform: translateX(-100vw); 
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.app-page {
+    width: 100vw;
+    height: 100vh;
+    padding: 25px;
+    padding-top: 40px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 40px; 
+    width: 100%;
+    min-height: 50px;
+}
+
+header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #ff003c; 
+    /* Мощный неоновый взрыв для заголовка */
+    text-shadow: 0 0 10px #ff003c, 0 0 20px #ff003c, 0 0 30px rgba(255, 0, 60, 0.6);
+    text-align: center;
+    margin: 0;
+}
+
+.nav-btn {
+    position: absolute;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.nav-btn.to-folders {
+    left: 0;
+    top: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-btn.to-notes {
+    right: 0;
+    top: 0;
+    font-size: 22px;         
+    color: #ff003c;          
+    text-shadow: 0 0 10px #ff003c, 0 0 20px rgba(255, 0, 60, 0.8);
+}
+
+.custom-folder-icon {
+    position: relative;
+    width: 24px;
+    height: 16px;
+    border: 2px solid #ff003c; 
+    border-radius: 2px;
+    box-shadow: 0 0 10px #ff003c; 
+}
+
+.custom-folder-icon::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: -2px;
+    width: 10px;
+    height: 4px;
+    background-color: #05070a;
+    border: 2px solid #ff003c;
+    border-bottom: none;
+    border-radius: 2px 2px 0 0;
+}
+
+/* СУПЕР-НЕОНОВАЯ ПОДСВЕТКА ДЛЯ СТРУКТУРНЫХ РАМОК */
+.scifi-input-wrapper, .scifi-note-wrapper, .scifi-folder-wrapper {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.scifi-folder-wrapper {
+    margin-bottom: 15px;
+}
+
+.scifi-border-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Тройное наслоение теней дает супер-яркое свечение лазера */
+    filter: drop-shadow(0 0 3px #ff007f) drop-shadow(0 0 8px #ff007f) drop-shadow(0 0 15px rgba(255, 0, 127, 0.5)); 
+}
+
+/* Красное свечение для поиска и активной папки */
+.scifi-input-wrapper .scifi-border-svg, .scifi-border-svg.active-svg {
+    filter: drop-shadow(0 0 3px #ff003c) drop-shadow(0 0 8px #ff003c) drop-shadow(0 0 15px rgba(255, 0, 60, 0.5));
+}
+
+#searchFields {
+    width: 100%;
+    background-color: #090d16; 
+    color: #fff;
+    padding: 18px;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 1px;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    clip-path: polygon(0 0, 92% 0, 100% 15px, 100% 100%, 8% 100%, 0 calc(100% - 15px));
+}
+
+#noteText, #folderNameInput {
+    width: 100%;
+    background-color: #090d16;
+    border: 1px solid #ff007f;
+    color: #fff;
+    padding: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+#noteText {
+    height: 150px;
+    resize: none;
+}
+
+.notes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+    padding-bottom: 100px;
+}
+
+.scifi-note {
+    background-color: #090d16;
+    padding: 18px;
+    width: 100%;
+    box-sizing: border-box;
+    clip-path: polygon(0 0, 94% 0, 100% 15px, 100% 100%, 6% 100%, 0 calc(100% - 15px));
+}
+
+.note-tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: #ff007f; 
+    display: block;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba(255, 0, 127, 0.5);
+}
+
+.note-content {
+    margin: 0;
+    font-size: 14px;
+    color: #e2e8f0;
+    line-height: 1.4;
+}
+
+.scifi-add-btn {
+    position: fixed !important;
+    bottom: 30px !important;
+    right: 30px !important;
+    z-index: 9999 !important;
+    width: 65px;
+    height: 65px;
+    background-color: #05070a;
+    border: 2px solid #ff007f; 
+    border-radius: 50%;
+    color: #ff007f;
+    box-shadow: 0 0 25px #ff007f, inset 0 0 10px rgba(255, 0, 127, 0.5); 
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.plus-icon {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1;
+    text-shadow: 0 0 8px #ff007f;
+}
+
+/* Контейнер-обертка для кнопки */
+.scifi-btn-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 25px;
+    box-sizing: border-box;
+}
+
+/* Новые стили для самой кнопки внутри лазерной рамки */
+.create-folder-btn {
+    width: 100%;
+    background: #090d16; /* Темный фон в стиле всего приложения */
+    border: none;        /* Убрали старый пунктир! */
+    color: #ff007f;      /* Фиолетово-розовый неон текста */
+    padding: 18px;       /* Сделали кнопку крупной и удобной */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    outline: none;
+    clip-path: polygon(0 0, 92% 0, 100% 15px, 100% 100%, 8% 100%, 0 calc(100% - 15px));
+}
+
+.sidebar-folders {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Очистили старый бордер у папок — теперь рамку рисует SVG-лазер из JS */
+.folder-box {
+    background-color: #090d16;
+    padding: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    box-sizing: border-box;
+    clip-path: polygon(0 0, 92% 0, 100% 15px, 100% 100%, 8% 100%, 0 calc(100% - 15px));
+    cursor: pointer;
+    color: #e2e8f0;
+}
+
+.folder-box.active {
+    color: #fff;
+    background-color: #110408;
+}
+
+.swipe-hint {
+    text-align: center;
+    font-size: 11px;
+    color: #e2e8f0;
+    opacity: 0.4;
+    letter-spacing: 1px;
+    margin-top: 30px;
+    text-transform: uppercase;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;    
+    justify-content: center; 
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.scifi-modal {
+    background-color: #090d16;
+    border: 2px solid #ff003c; 
+    width: 85%;
+    max-width: 340px;
+    padding: 25px;
+    box-sizing: border-box;
+    clip-path: polygon(0 0, 90% 0, 100% 40px, 100% 100%, 10% 100%, 0 calc(100% - 40px));
+    box-shadow: 0 0 25px rgba(255, 0, 60, 0.3);
+}
+
+.scifi-modal h3 {
+    margin-top: 0;
+    font-size: 14px;
+    color: #ff003c;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.modal-btn {
+    flex: 1;
+    background: transparent;
+    padding: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.modal-btn.save {
+    border: 1px solid #ff003c;
+    color: #ff003c;
+}
+
+.modal-btn.cancel {
+    border: 1px solid #cbcdcd;
+    color: #cbcdcd;
+}
+
+.move-options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.move-folder-item {
+    background-color: #05070a;
+    border: 1px solid #ff007f;
+    padding: 16px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+}
